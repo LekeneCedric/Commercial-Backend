@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\commercial;
 use App\Models\facture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -53,4 +54,5 @@ class FactureController extends Controller
           $facture = $facture->delete();
           return response()->json($facture);
     }
+    
 }

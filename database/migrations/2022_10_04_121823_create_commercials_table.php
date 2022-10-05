@@ -19,6 +19,7 @@ class CreateCommercialsTable extends Migration
             $table->string('prenom');
             $table->string('email');
             $table->string('phone');
+            $table->integer('commission');
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

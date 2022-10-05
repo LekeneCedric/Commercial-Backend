@@ -32,6 +32,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // COMMERCIAUX 
 Route::get('/commerciaux',[CommercialController::class,'index']);
 Route::get('/commerciaux/{id}',[CommercialController::class,'find']);
+Route::get('/facturesCommercial/{id}',[CommercialController::class,'facturesCommercial']);
+Route::get('/nombres_clientsCommercial{id}',[CommercialController::class,'nombre_clientsCommercial']);
+Route::get('/clientsCommercial{id}',[CommercialController::class,'clientsCommercial']);
 Route::post('/commerciaux',[CommercialController::class,'store']);
 Route::put('/commerciaux/{id}',[CommercialController::class,'put']);
 Route::delete('/commerciaux/{id}',[CommercialController::class,'delete']);

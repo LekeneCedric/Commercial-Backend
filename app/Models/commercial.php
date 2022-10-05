@@ -14,14 +14,18 @@ class commercial extends Model
         'prenom',
         'email',
         'phone',
+        'commission',
         'id_user'
     ];
     protected $dates = ['created_at', 'updated_at'];
+    public function facture(){
+        return $this->hasMany(facture::class);
+    }
     public function client(){
         return $this->hasMany(client::class);
     }
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
     public function suggestion(){
         return $this->hasMany(suggestion::class);

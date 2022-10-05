@@ -18,6 +18,7 @@ class CommercialController extends Controller
         'prenom'=>'required|string',
         'email'=>'required|email',
         'phone'=>'required|string',
+        'commission'=>'required'
        ]);
        if($validator->fails()){
         return response()->json($validator->errors(),400);
@@ -50,5 +51,44 @@ class CommercialController extends Controller
             'message'=>'commercial supprime avec success',
             'commercial'=>$commercial
         ],204);
+    }
+    public function facturesCommercial($id_commercial){
+        $commercial = commercial::find($id_commercial);
+        if(is_null($commercial)){
+            return response()->json([
+                'message'=>'aucun commercial correspondant'
+            ]);
+        }
+        $factures = $commercial->facture();
+        foreach($factures as $facture){
+            $facture->client;
+            $facture->facturedetail;
+        }
+        return response()->json($factures,200);
+    }
+    public function clientsCommercial($id_commercial){
+        $commercial = commercial::find($id_commercial);
+        if(is_null($commercial)){
+            return response()->json([
+               'message'=>'aucun commercial correspondant'
+            ]);
+        }
+        $clients = $commercial->client;
+        foreach($clients as $client){
+            $client->facture->facturedetail;
+        }
+        return response()->json($clients);
+    }
+
+    public function nombre_clientsCommercial($id_commercial){
+        $commercial = commercial::find($id_commercial);
+        if(is_null($commercial)){
+            return response()->json([
+               'message'=>'aucun commercial correspondant'
+            ]);
+        }
+        $clients = $commercial->client;
+        $nbClient = count($clients);
+        return response()->json($nbClient);
     }
 }
