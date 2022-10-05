@@ -35,6 +35,8 @@ Route::get('/commerciaux/{id}',[CommercialController::class,'find']);
 Route::get('/facturesCommercial/{id}',[CommercialController::class,'facturesCommercial']);
 Route::get('/nombres_clientsCommercial{id}',[CommercialController::class,'nombre_clientsCommercial']);
 Route::get('/clientsCommercial{id}',[CommercialController::class,'clientsCommercial']);
+Route::get('/nombre_facturesCommercial/{id}',[CommercialController::class,'nombre_facturesCommercial']);
+Route::get('/articlesVendusCommercial',[CommercialController::class,'articlesVendusCommercial']);
 Route::post('/commerciaux',[CommercialController::class,'store']);
 Route::put('/commerciaux/{id}',[CommercialController::class,'put']);
 Route::delete('/commerciaux/{id}',[CommercialController::class,'delete']);

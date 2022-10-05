@@ -52,6 +52,14 @@ class CommercialController extends Controller
             'commercial'=>$commercial
         ],204);
     }
+    public function nombre_facturesCommercial($id_commercial){
+        $commercial = commercial::find($id_commercial);
+        if(is_null($commercial)){
+            return response()->json(['message'=>'aucun commercial correspondant']);
+        }
+        $factures = $commercial->facture;
+        return response()->json(count($factures),200);
+    }
     public function facturesCommercial($id_commercial){
         $commercial = commercial::find($id_commercial);
         if(is_null($commercial)){
@@ -59,12 +67,34 @@ class CommercialController extends Controller
                 'message'=>'aucun commercial correspondant'
             ]);
         }
-        $factures = $commercial->facture();
+        $factures = $commercial->facture;
         foreach($factures as $facture){
             $facture->client;
             $facture->facturedetail;
         }
         return response()->json($factures,200);
+    }
+    public function articlesVendusCommercial($id_commercial){
+        $commercial = commercial::find($id_commercial);
+        if(is_null($commercial)){
+            return response()->json(['message'=>'aucun commercial correspondant']);
+        }
+        $factures = $commercial->facture;
+        $articles=[];
+        $details=[];
+        foreach($factures as $facture){
+            foreach($facture as $facturedetail){
+                array_push($details,$facturedetail);
+            }
+        }
+        $quantite_total=0;
+        foreach($details as $detail){
+           $quantite_total=$quantite_total + $detail->quantite;
+        }
+        return response()->json([
+            'quantite_total' => $quantite_total
+        ]);
+        
     }
     public function clientsCommercial($id_commercial){
         $commercial = commercial::find($id_commercial);
