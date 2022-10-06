@@ -17,9 +17,9 @@ class RetourController extends Controller
         $validators = Validator::make($request->all(),[
         'intitule'=>'required|string',
         'description'=>'required|string',
-        'id_article'=>'required|int',
-        'id_client'=>'required|int',
-        'id_commercial'=>'required|int'
+        'article_id'=>'required|int',
+        'client_id'=>'required|int',
+        'commercial_id'=>'required|int'
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

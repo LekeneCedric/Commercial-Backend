@@ -14,7 +14,7 @@ class client extends Model
         'telephone',
         'email',
         'entreprise',
-        'id_commercial'
+        'commercial_id'
     ];
     protected $dates = ['created_at', 'updated_at'];
 
@@ -22,7 +22,7 @@ class client extends Model
         return $this->hasMany(facture::class);
     }
     public function commercial(){
-        return $this->belongsTo(commercial::class);
+        return $this->belongsTo(commercial::class,'commercial_id');
     }
     public function suggestion(){
         return $this->hasMany(suggestion::class);

@@ -19,9 +19,9 @@ class CreateSuggestionsTable extends Migration
             $table->string('description');
             $table->string('ancien_prix');
             $table->string('prix_suggere');
-            $table->foreignId('id_article')->constrained('articles')->onDelete('cascade');
-            $table->foreignId('id_client')->constrained('clients')->onDelete('cascade');
-            $table->foreignId('id_commercial')->constrained('commercials')->onDelete('cascade');
+            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
+            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
+            $table->foreignId('commercial_id')->constrained('commercials')->onDelete('cascade');
             $table->timestamps();
         });
     }

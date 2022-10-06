@@ -16,8 +16,8 @@ class FacturedetailController extends Controller
         $validators = Validator::make($request->all(),[
         'prixUnitaire'=>'required|int',
         'quantite'=>'required|int',
-        'id_facture'=>'required|int',
-        'id_article'=>'required|int'
+        'facture_id'=>'required|int',
+        'article_id'=>'required|int'
             
         ]);
         if($validators->fails()){

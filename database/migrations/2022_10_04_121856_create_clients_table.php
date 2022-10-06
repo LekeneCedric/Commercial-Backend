@@ -20,7 +20,7 @@ class CreateClientsTable extends Migration
             $table->string('telephone');
             $table->string('email');
             $table->string('entreprise');
-            $table->foreignId('id_commercial')->constrained('commercials')->onDelete('cascade');
+            $table->foreignId('commercial_id')->constrained('commercials')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -14,8 +14,8 @@ class facture extends Model
         'description',
         'lieu',
         'delaipayement',
-        'id_commercial',
-        'id_client'
+        'commercial_id',
+        'client_id'
         
     ];
     protected $dates = ['created_at', 'updated_at'];
@@ -24,9 +24,9 @@ class facture extends Model
         return $this->hasMany(facturedetail::class);
     }
     public function commercial(){
-        return $this->belongsTo(commercial::class);
+        return $this->belongsTo(commercial::class,'commercial_id');
     }
     public function client(){
-        return $this->belongsTo(client::class);
+        return $this->belongsTo(client::class,'client_id');
     }
 }

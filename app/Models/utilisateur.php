@@ -11,13 +11,14 @@ class utilisateur extends Model
 {
     use HasFactory,Notifiable,HasApiTokens;
 
-    protected $fillabe = [
+    protected $fillable = [
+        'id',
         'nom',
         'prenom',
         'email',
         'password',
         'telephone',
-        'date_enregistrement'
+        'date_enregistrement',
     ];
     
     protected $dates = ['created_at', 'updated_at'];

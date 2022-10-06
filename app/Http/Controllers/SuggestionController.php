@@ -19,9 +19,9 @@ class SuggestionController extends Controller
         'description'=>'required|string',
         'ancien_prix'=>'required|int',
         'prix_suggere'=>'required|int',
-        'id_article'=>'required|int',
-        'id_client'=>'required|int',
-        'id_commercial'=>'required|int'
+        'article_id'=>'required|int',
+        'client_id'=>'required|int',
+        'commercial_id'=>'required|int'
             
         ]);
         if($validators->fails()){

@@ -12,6 +12,7 @@ use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\RetourController;
 use App\Http\Controllers\SuggestionController;
+use App\Models\utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,14 +34,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register',[auth::class,'register']);
 Route::post('/login',[auth::class,'login']);
 Route::post('/logout',[auth::class,'logout']);
+
+// UTILISATEURS 
+Route::get('/utilisateurs',[utilisateur::class,'index']);
+
 // COMMERCIAUX
+Route::get('/commercialProfil/{id_commercial}',[CommercialController::class,'commercialProfil']);
 Route::get('/commerciaux',[CommercialController::class,'index']);
 Route::get('/commerciaux/{id}',[CommercialController::class,'find']);
 Route::get('/facturesCommercial/{id}',[CommercialController::class,'facturesCommercial']);
-Route::get('/nombres_clientsCommercial{id}',[CommercialController::class,'nombre_clientsCommercial']);
-Route::get('/clientsCommercial{id}',[CommercialController::class,'clientsCommercial']);
+Route::get('/nombres_clientsCommercial/{id}',[CommercialController::class,'nombre_clientsCommercial']);
+Route::get('/clientsCommercial/{id}',[CommercialController::class,'clientsCommercial']);
 Route::get('/nombre_facturesCommercial/{id}',[CommercialController::class,'nombre_facturesCommercial']);
-Route::get('/articlesVendusCommercial',[CommercialController::class,'articlesVendusCommercial']);
+Route::get('/articlesVendusCommercial/{id}',[CommercialController::class,'articlesVendusCommercial']);
 Route::post('/commerciaux',[CommercialController::class,'store']);
 Route::put('/commerciaux/{id}',[CommercialController::class,'put']);
 Route::delete('/commerciaux/{id}',[CommercialController::class,'delete']);

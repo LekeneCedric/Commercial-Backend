@@ -14,16 +14,16 @@ class facturedetail extends Model
         'quantite',
         'prixUnitaire',
         'total',
-        'id_facture',
-        'id_article'
+        'facture_id',
+        'article_id'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
     public function article(){
-        return $this->belongsTo(article::class);
+        return $this->belongsTo(article::class, 'article_id');
     }
     public function facture(){
-        return $this->belongsTo(facture::class);
+        return $this->belongsTo(facture::class,'facture_id');
     }
 
 }

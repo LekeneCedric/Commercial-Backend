@@ -21,9 +21,9 @@ class article extends Model
         'stock_securite',
         'stock_restant',
         'stock_realise',
-        'id_fournisseur',
-        'id_marque',
-        'id_categorie'
+        'fournisseur_id',
+        'marque_id',
+        'categorie_id'
     ];
     protected $dates = ['created_at', 'updated_at'];
     
@@ -40,12 +40,12 @@ class article extends Model
         return $this->hasMany(media::class);
     }
     public function categorie(){
-        return $this->belongsTo(categorie::class);
+        return $this->belongsTo(categorie::class,'categorie_id');
     }
     public function fournisseur(){
-        return $this->belongsTo(fournisseur::class);
+        return $this->belongsTo(fournisseur::class,'fournisseur_id');
     }
     public function marque(){
-        return $this->belongsTo(marque::class);
+        return $this->belongsTo(marque::class,'categorie_id');
     }
 }

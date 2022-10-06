@@ -18,9 +18,9 @@ class CreateMediaTable extends Migration
             $table->string('filePath');
             $table->string('extension');
             $table->string('fileName');
-            $table->foreignId('id_article')->nullable()->default(null)->constrained('articles')->onDelete('cascade');
-            $table->foreignId('id_client')->nullable()->default(null)->constrained('clients')->onDelete('cascade');
-            $table->foreignId('id_utilisateur')->nullable()->default(null)->constrained('utilisateurs')->onDelete('cascade');
+            $table->foreignId('article_id')->nullable()->default(null)->constrained('articles')->onDelete('cascade');
+            $table->foreignId('client_id')->nullable()->default(null)->constrained('clients')->onDelete('cascade');
+            $table->foreignId('utilisateur_id')->nullable()->default(null)->constrained('utilisateurs')->onDelete('cascade');
             $table->timestamps();
         });
     }

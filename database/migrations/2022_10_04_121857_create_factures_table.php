@@ -19,8 +19,8 @@ class CreateFacturesTable extends Migration
             $table->string('description');
             $table->string('lieu');
             $table->timestamp('delaipayement');
-            $table->foreignId('id_commercial')->nullable()->default(null)->constrained('commercials')->onDelete('cascade');
-            $table->foreignId('id_client')->nullable()->default(null)->constrained('clients')->onDelete('cascade');
+            $table->foreignId('commercial_id')->nullable()->default(null)->constrained('commercials')->onDelete('cascade');
+            $table->foreignId('client_id')->nullable()->default(null)->constrained('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }

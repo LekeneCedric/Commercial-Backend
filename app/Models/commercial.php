@@ -10,22 +10,19 @@ class commercial extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'nom',
-        'prenom',
-        'email',
-        'phone',
         'commission',
-        'id_user'
+        'user_id'
     ];
     protected $dates = ['created_at', 'updated_at'];
+
     public function facture(){
         return $this->hasMany(facture::class);
     }
     public function client(){
         return $this->hasMany(client::class);
     }
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function utilisateur(){
+        return $this->belongsTo(utilisateur::class,'user_id');
     }
     public function suggestion(){
         return $this->hasMany(suggestion::class);

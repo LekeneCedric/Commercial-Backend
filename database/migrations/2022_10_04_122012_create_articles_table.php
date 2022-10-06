@@ -26,9 +26,9 @@ class CreateArticlesTable extends Migration
             $table->integer('stock_securite');
             $table->integer('stock_restant');
             $table->integer('stock_realise');
-            $table->foreignId('id_fournisseur')->constrained('fournisseurs')->onDelete('cascade');
-            $table->foreignId('id_marque')->constrained('marques')->onDelete('cascade');
-            $table->foreignId('id_categorie')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('fournisseur_id')->constrained('fournisseurs')->onDelete('cascade');
+            $table->foreignId('marque_id')->constrained('marques')->onDelete('cascade');
+            $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

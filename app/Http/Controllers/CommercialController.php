@@ -14,11 +14,8 @@ class CommercialController extends Controller
     }
     public function store(Request $request){
        $validator = Validator::make($request->all(),[
-        'nom'=>'required|string',
-        'prenom'=>'required|string',
-        'email'=>'required|email',
-        'phone'=>'required|string',
-        'commission'=>'required'
+        'commission'=>'required',
+        'user_id'=>'required'
        ]);
        if($validator->fails()){
         return response()->json($validator->errors(),400);
@@ -83,7 +80,7 @@ class CommercialController extends Controller
         $articles=[];
         $details=[];
         foreach($factures as $facture){
-            foreach($facture as $facturedetail){
+            foreach($facture->facturedetail as $facturedetail){
                 array_push($details,$facturedetail);
             }
         }
@@ -91,9 +88,7 @@ class CommercialController extends Controller
         foreach($details as $detail){
            $quantite_total=$quantite_total + $detail->quantite;
         }
-        return response()->json([
-            'quantite_total' => $quantite_total
-        ]);
+        return response()->json($quantite_total);
         
     }
     public function clientsCommercial($id_commercial){
@@ -120,5 +115,15 @@ class CommercialController extends Controller
         $clients = $commercial->client;
         $nbClient = count($clients);
         return response()->json($nbClient);
+    }
+    public function commercialProfil($id_commercial){
+        $profil = commercial::find($id_commercial);
+        if(is_null($profil)){
+            return response()->json([
+                'message'=>"Aucun commercial correspondant a cet ID"
+            ]);
+        }
+        $profil->utilisateur;
+        return response()->json($profil);
     }
 }

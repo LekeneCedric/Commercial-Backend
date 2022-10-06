@@ -20,6 +20,7 @@ class ClientController extends Controller
         'telephone'=>'required|string',
         'sexe'=>'required|string',
         'entreprise'=>'required|string',
+        'commercial_id'=>'required|int'
        ]);
        if($validator->fails()){
         return response()->json($validator->errors(),400);

@@ -14,9 +14,8 @@ class media extends Model
         'filePath',
         'extension',
         'fileName',
-        'id_article',
-        'id_client',
-        'id_utilisateur'
-
+        'article_id',
+        'client_id',
+        'utilisateur_id'
     ];
 }

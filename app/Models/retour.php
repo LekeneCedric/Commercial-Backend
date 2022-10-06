@@ -13,20 +13,20 @@ class retour extends Model
         'id',
         'intitule',
         'description',
-        'id_article',
-        'id_client',
-        'id_commercial'
+        'article_id',
+        'client_id',
+        'commercial_id'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
 
     public function commercial(){
-        return $this->belongsTo(commercial::class);
+        return $this->belongsTo(commercial::class,'commercial_id');
     }
     public function client(){
-        return $this->belongsTo(client::class);
+        return $this->belongsTo(client::class,'client_id');
     }
     public function article(){
-        return $this->belongsTo(article::class);
+        return $this->belongsTo(article::class,'article_id');
     }
 }

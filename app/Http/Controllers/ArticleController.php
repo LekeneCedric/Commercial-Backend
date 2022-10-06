@@ -27,9 +27,9 @@ class ArticleController extends Controller
             'stock_securite'=>'required|int',
             'stock_restant'=>'required|int',
             'stock_realise'=>'required|int',
-            'id_fournisseur'=>'required|int',
-            'id_marque'=>'required|int',
-            'id_categorie'=>'required|int'
+            'fournisseur_id'=>'required|int',
+            'marque_id'=>'required|int',
+            'categorie_id'=>'required|int'
             
         ]);
         if($validators->fails()){

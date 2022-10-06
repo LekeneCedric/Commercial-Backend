@@ -15,12 +15,8 @@ class CreateCommercialsTable extends Migration
     {
         Schema::create('commercials', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nom');
-            $table->string('prenom');
-            $table->string('email');
-            $table->string('phone');
             $table->integer('commission');
-            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('utilisateurs')->onDelete('cascade');
             $table->timestamps();
         });
     }

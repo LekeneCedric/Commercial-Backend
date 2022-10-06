@@ -18,8 +18,8 @@ class CreateFacturedetailsTable extends Migration
             $table->integer('quantite');
             $table->integer('prixUnitaire');
             $table->integer('total');
-            $table->foreignId('id_facture')->constrained('factures')->onDelete('cascade');
-            $table->foreignId('id_article')->constrained('articles')->onDelete('cascade');
+            $table->foreignId('facture_id')->constrained('factures')->onDelete('cascade');
+            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
             $table->timestamps();
         });
     }
