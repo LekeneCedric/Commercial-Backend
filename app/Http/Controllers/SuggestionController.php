@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\client;
 use App\Models\suggestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -53,5 +54,10 @@ class SuggestionController extends Controller
           }
           $suggestion = $suggestion->delete();
           return response()->json($suggestion);
+    }
+    public function suggestionsClient($id_client){
+        $client = client::find($id_client);
+        $suggestions = $client->suggestion;
+        return response()->json($suggestions,200);
     }
 }

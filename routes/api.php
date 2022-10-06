@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\auth;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CommercialController;
@@ -28,8 +29,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-// COMMERCIAUX 
+// Authentication
+Route::post('/register',[auth::class,'register']);
+Route::post('/login',[auth::class,'login']);
+Route::post('/logout',[auth::class,'logout']);
+// COMMERCIAUX
 Route::get('/commerciaux',[CommercialController::class,'index']);
 Route::get('/commerciaux/{id}',[CommercialController::class,'find']);
 Route::get('/facturesCommercial/{id}',[CommercialController::class,'facturesCommercial']);
@@ -51,6 +55,7 @@ Route::delete('/factures/{id}',[FactureController::class,'delete']);
 //CLIENT
 Route::get('/clients',[ClientController::class,'index']);
 Route::get('/clients/{id}',[ClientController::class,'find']);
+Route::get('/facturesClient/{id_client}',[ClientController::class,'facturesClient']);
 Route::post('/clients',[ClientController::class,'store']);
 Route::put('/clients/{id}',[ClientController::class,'update']);
 Route::delete('/clients/{id}',[ClientController::class,'delete']);
@@ -72,6 +77,8 @@ Route::delete('/retours/{id}',[RetourController::class,'delete']);
 //SUGGESTION_CLIENT
 Route::get('/suggestions',[SuggestionController::class,'index']);
 Route::get('/suggestions/{id}',[SuggestionController::class,'find']);
+Route::get('/suggestionsClient/{id_client}',[SuggestionController::class,'suggestionsClient']);
+Route::get('/retourClient/{id_client}',[SuggestionController::class,'retourClient']); 
 Route::post('/suggestions',[SuggestionController::class,'store']);
 Route::put('/suggestions/{id}',[SuggestionController::class,'update']);
 Route::delete('/suggestions/{id}',[SuggestionController::class,'delete']);

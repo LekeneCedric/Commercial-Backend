@@ -58,4 +58,27 @@ class ClientController extends Controller
             'client'=>$client
         ],204);
     }
+    public function facturesClient($id_client){
+        $client = client::find($id_client);
+        if(is_null($client)){
+            return response()->json([
+                'message'=>'aucun client correspondant'
+            ]);
+        }
+        $factures = $client->facture;
+        foreach($factures as $facture){
+             $facture->facturedetail;
+        }
+        return response()->json($facture,200);
+    }
+    public function retourClient($id_client){
+        $client = client::find($id_client);
+        if(is_null($client)){
+            return response()->json([
+                'message'=>'aucun client correspondant'
+            ]);
+        }
+        $retours = $client->retour;
+        return response()->json($retours,200);
+    }
 }
