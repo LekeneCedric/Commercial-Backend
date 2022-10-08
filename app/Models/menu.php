@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class fournisseur extends Model
+class menu extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'id',
-        'email',
-        'telephone',
-        'adresse',
-        'domaine_activite',
-    ];
-    protected $dates = ['created_at', 'updated_at'];
     
-    public function article(){
-        return $this->hasMany(article::class);
+    protected $fillable = [
+        'titre',
+        'color',
+        'icon'
+    ];
+
+    protected $dates = ['created_at', 'updated_at'];
+
+    public function categorie(){
+        return $this->hasMany(categorie::class);
     }
 }

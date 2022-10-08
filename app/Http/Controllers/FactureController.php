@@ -15,7 +15,6 @@ class FactureController extends Controller
     }
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
-            'description'=>'required',
             'lieu'=>'required',
             'delaipayement'=>'required',
             'commercial_id'=>'required',
@@ -34,6 +33,12 @@ class FactureController extends Controller
             return response()->json([
                 'message'=>'aucune facture correspondante!'
             ]);
+        }
+        $facture->facturedetail;
+        $facture->client;
+        foreach($facture->facturedetail as $factured){
+            $factured->article->categorie;
+            
         }
         return response()->json($facture,200);
     }

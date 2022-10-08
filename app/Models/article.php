@@ -17,7 +17,6 @@ class article extends Model
         'prix',
         'prix_achat',
         'stockable',
-        'dateajout',
         'stock_securite',
         'stock_restant',
         'stock_realise',

@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Validator;
 class CategorieController extends Controller
 {
     public function index(){
-        $categories = categorie::paginate(15);
+        $categories = categorie::all();
         return response()->json($categories,200);
     }
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
         'titre'=>'required|string',
-        'menu'=>'required|string',
+        'icon'=>'required|string',
+        'menu_id'=>'required|int',
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

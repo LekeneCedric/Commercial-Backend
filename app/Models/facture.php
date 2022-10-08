@@ -11,7 +11,6 @@ class facture extends Model
     protected $fillable = [
         'id',
         'etat',
-        'description',
         'lieu',
         'delaipayement',
         'commercial_id',

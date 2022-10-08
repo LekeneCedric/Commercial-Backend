@@ -18,7 +18,6 @@ class utilisateur extends Model
         'email',
         'password',
         'telephone',
-        'date_enregistrement',
     ];
     
     protected $dates = ['created_at', 'updated_at'];

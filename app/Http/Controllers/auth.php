@@ -14,9 +14,8 @@ class auth extends Controller
         $validator=Validator::make($request->all(),[
             'nom'=>'required|string',
             'prenom'=>'required|string',
-            'email'=>'required|string|email|max:100|unique:users',
-            'telephone'=>'required|string',
-            'date_enregistrement'=>'required|date_format:Y-m-d H:i:s',
+            'email'=>'required|string|email|max:100|unique:utilisateurs',
+            'telephone'=>'required|string|unique:utilisateurs',
             'password'=>'required|string|confirmed' 
         ]);
 

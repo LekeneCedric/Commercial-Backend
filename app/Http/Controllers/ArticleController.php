@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\article;
+use App\Models\categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,7 +24,6 @@ class ArticleController extends Controller
             'prix'=>'required|int',
             'prix_achat'=>'required|int',
             'stockable'=>'required',
-            'dateajout'=>'required|date_format:Y-m-d H:i:s',
             'stock_securite'=>'required|int',
             'stock_restant'=>'required|int',
             'stock_realise'=>'required|int',
@@ -45,6 +45,7 @@ class ArticleController extends Controller
                 'message'=>'aucun article correspondante!'
             ]);
         }
+        $article->categorie;
         return response()->json($article,200);
     }
     public function update(Request $request, $id){
@@ -62,5 +63,16 @@ class ArticleController extends Controller
           }
           $article = $article->delete();
           return response()->json($article);
+    }
+    public function articlesCategories($id){
+        $categorie = categorie::find($id);
+        if(is_null($categorie)){
+            return response()->json(['message'=>'aucune categorie correspondante']);
+        }
+        $articles = $categorie->article;
+        foreach($articles as $article){
+            $article->categorie;
+        }
+        return response()->json($articles,200);
     }
 }

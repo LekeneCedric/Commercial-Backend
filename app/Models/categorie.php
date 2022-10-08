@@ -12,12 +12,16 @@ class categorie extends Model
     protected $fillable=[
         'id',
         'titre',
-        'menu'
+        'icon',
+        'menu_id'
     ];
     
     protected $dates = ['created_at', 'updated_at'];
 
     public function article(){
         return $this->hasMany(article::class);
+    }
+    public function menu(){
+        return $this->belongsTo(menu::class,'menu_id');
     }
 }

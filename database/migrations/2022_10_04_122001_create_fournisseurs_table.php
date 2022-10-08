@@ -19,7 +19,6 @@ class CreateFournisseursTable extends Migration
             $table->string('telephone');
             $table->string('adresse');
             $table->string('domaine_activite');
-            $table->dateTime('dateajout');
             $table->timestamps();
         });
     }

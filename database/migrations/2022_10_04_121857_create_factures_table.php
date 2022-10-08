@@ -16,7 +16,6 @@ class CreateFacturesTable extends Migration
         Schema::create('factures', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('etat');
-            $table->string('description');
             $table->string('lieu');
             $table->timestamp('delaipayement');
             $table->foreignId('commercial_id')->nullable()->default(null)->constrained('commercials')->onDelete('cascade');

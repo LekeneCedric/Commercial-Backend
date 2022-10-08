@@ -17,7 +17,8 @@ class FacturedetailController extends Controller
         'prixUnitaire'=>'required|int',
         'quantite'=>'required|int',
         'facture_id'=>'required|int',
-        'article_id'=>'required|int'
+        'article_id'=>'required|int',
+        'total'=>'required|int'
             
         ]);
         if($validators->fails()){

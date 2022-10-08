@@ -18,7 +18,6 @@ class FournisseurController extends Controller
             'telephone'=>'required|string',
             'adresse'=>'required|string',
             'domaine_activite'=>'required|string',
-            'dateajout'=>'required|date_format:Y-m-d H:i:s'
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

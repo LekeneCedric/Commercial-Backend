@@ -22,7 +22,6 @@ class CreateArticlesTable extends Migration
             $table->integer('prix');
             $table->integer('prix_achat');
             $table->boolean('stockable');
-            $table->dateTime('dateajout');
             $table->integer('stock_securite');
             $table->integer('stock_restant');
             $table->integer('stock_realise');

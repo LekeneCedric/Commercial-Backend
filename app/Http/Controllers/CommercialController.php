@@ -15,7 +15,7 @@ class CommercialController extends Controller
     public function store(Request $request){
        $validator = Validator::make($request->all(),[
         'commission'=>'required',
-        'user_id'=>'required'
+        'user_id'=>'required|unique:commercials'
        ]);
        if($validator->fails()){
         return response()->json($validator->errors(),400);
@@ -67,8 +67,13 @@ class CommercialController extends Controller
         $factures = $commercial->facture;
         foreach($factures as $facture){
             $facture->client;
-            $facture->facturedetail;
+            $total = 0;
+            foreach($facture->facturedetail as $detail){
+                $total += $detail->quantite*$detail->prixUnitaire;
+              }
+            $facture->montant_total = $total;  
         }
+        
         return response()->json($factures,200);
     }
     public function articlesVendusCommercial($id_commercial){
@@ -125,5 +130,38 @@ class CommercialController extends Controller
         }
         $profil->utilisateur;
         return response()->json($profil);
+    }
+    public function statistics($id){
+        $commercial = Commercial::find($id);
+        if(is_null($commercial)){
+            return response()->json([
+               'message'=>'aucun commercial correspondant'
+            ]);
+        }
+        //recuperation du nombre de clients du commercial
+        $clients = $commercial->client;
+        $nbclients = count($clients);
+
+        //recupere le nombre de clients du commercial
+        $factures = $commercial->facture;
+        $nbproduitsvendus =0;
+        foreach($factures as $facture){
+            foreach($facture->facturedetail as $detail){
+                $nbproduitsvendus += $detail->quantite;
+              }
+        }
+        
+        //ventes 
+        $nbventes = count($factures);
+        $commission_totale = $nbproduitsvendus*$commercial->commission;
+
+        return response()->json([
+            'ma_commission'=>$commercial->commission,
+            'commission_totale'=>$commission_totale,
+            'nb_ventes'=>$nbventes,
+            'nb_prod_vendus'=>$nbproduitsvendus,
+            'nb_clients' => $nbclients
+        ]);
+
     }
 }

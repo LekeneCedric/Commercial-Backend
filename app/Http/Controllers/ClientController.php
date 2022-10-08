@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Validator;
 class ClientController extends Controller
 {
     public function index(){
-        $clients = client::paginate(15);
+        $clients = client::all();
         return response()->json($clients,200);
     }
     public function store(Request $request){
        $validator = Validator::make($request->all(),[
         'nom'=>'required|string',
         'prenom'=>'required|string',
-        'email'=>'required|email',
+        'email'=>'required|email|unique:clients|unique:utilisateurs',
         'telephone'=>'required|string',
         'sexe'=>'required|string',
         'entreprise'=>'required|string',
