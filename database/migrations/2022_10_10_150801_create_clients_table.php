@@ -24,7 +24,6 @@ class CreateClientsTable extends Migration
             $table->string('num_contri');
             $table->string('registre');
             $table->string('logo');
-            $table->string('logo');
             $table->string('mot_cle');
             $table->text('description');
             $table->string('domaine_activite');

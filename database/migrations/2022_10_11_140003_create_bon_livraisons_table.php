@@ -22,8 +22,8 @@ class CreateBonLivraisonsTable extends Migration
             $table->integer('isvalider');
             $table->integer('isvalider1');
             $table->text('motif1');
-            $table->integer('isvalider1');
-            $table->text('motif1');
+            $table->integer('isvalider2');
+            $table->text('motif2');
             $table->foreignId('idutilisateur')->constrained('utilisateurs')->onDelete('cascade');
             $table->foreignId('idclient')->constrained('clients')->onDelete('cascade');
             $table->foreignId('id_bon_commande')->constrained('bon_commandes')->onDelete('cascade');

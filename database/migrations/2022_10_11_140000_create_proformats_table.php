@@ -29,7 +29,7 @@ class CreateProformatsTable extends Migration
             $table->foreignId('idagence')->constrained('agences')->onDelete('cascade');
             $table->foreignId('idclient')->constrained('clients')->onDelete('cascade');
             $table->foreignId('id_mode_reglement')->constrained('mode_reglements')->onDelete('cascade');
-            $table->foreignId('idcondition')->constrained('conditions')->onDelete('cascade');
+            $table->foreignId('idcondition')->constrained('condition_reglements')->onDelete('cascade');
             $table->foreignId('idtva')->constrained('tvas')->onDelete('cascade');
             $table->foreignId('idmonnaie')->constrained('monnaies')->onDelete('cascade');
             $table->timestamps();

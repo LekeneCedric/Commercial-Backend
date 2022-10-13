@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommercialsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateCommercialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commercials', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('commission');
-            $table->foreignId('user_id')->constrained('utilisateurs')->onDelete('cascade');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ class CreateCommercialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commercials');
+        Schema::dropIfExists('roles');
     }
 }
