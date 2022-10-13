@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFournisseursTable extends Migration
+class CreateConditionReglementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateFournisseursTable extends Migration
      */
     public function up()
     {
-        Schema::create('fournisseurs', function (Blueprint $table) {
+        Schema::create('condition_reglements', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nom');
-            $table->string('email');
-            $table->string('telephone');
-            $table->string('adresse');
-            $table->string('photo')->nullable();
-            $table->string('domaine_activite');
+            $table->string('intitule');
+            $table->integer('duree');
+            $table->string('frequence');
+            $table->integer('id_agent')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateFournisseursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fournisseurs');
+        Schema::dropIfExists('condition_reglements');
     }
 }

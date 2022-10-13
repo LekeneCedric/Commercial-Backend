@@ -15,8 +15,9 @@ class MenuController extends Controller
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
         'titre'=>'required|string',
-        'color'=>'required|string',
-        'icon'=>'required|string',
+        'lien'=>'required|string',
+        'ordre'=>'required|string',
+        'idparent'=>'required'
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

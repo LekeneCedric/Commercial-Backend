@@ -14,6 +14,7 @@ class FournisseurController extends Controller
     }
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
+            'nom'=>'required|string',
             'email'=>'required|email',
             'telephone'=>'required|string',
             'adresse'=>'required|string',

@@ -14,13 +14,25 @@ class ClientController extends Controller
     }
     public function store(Request $request){
        $validator = Validator::make($request->all(),[
-        'nom'=>'required|string',
-        'prenom'=>'required|string',
-        'email'=>'required|email|unique:clients|unique:utilisateurs',
-        'telephone'=>'required|string',
-        'sexe'=>'required|string',
-        'entreprise'=>'required|string',
-        'commercial_id'=>'required|int'
+        'type'=>'required',
+        'code'=>'required',
+        'password'=>'required',
+        'adresse'=>'required',
+        'ville'=>'required',
+        'siteweb'=>'required',
+        'num_contri'=>'required',
+        'registre'=>'required',
+        'logo'=>'required',
+        'mot_cle'=>'required',
+        'description'=>'required',
+        'domaine_activite'=>'required',
+        'nom'=>'required',
+        'prenom'=>'required',
+        'telephone'=>'required',
+        'email'=>'required|email',
+        'entreprise'=>'required',
+        'idpays'=>'required',
+        'idcategorie'=>'required'
        ]);
        if($validator->fails()){
         return response()->json($validator->errors(),400);

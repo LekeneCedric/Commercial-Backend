@@ -16,7 +16,9 @@ class auth extends Controller
             'prenom'=>'required|string',
             'email'=>'required|string|email|max:100|unique:utilisateurs',
             'telephone'=>'required|string|unique:utilisateurs',
-            'password'=>'required|string|confirmed' 
+            'password'=>'required|string|confirmed',
+            'idrole' => 'required|int',
+            'idagence'=>'required|int'
         ]);
 
         if($validator->fails()){
@@ -29,11 +31,8 @@ class auth extends Controller
             ]
             ));
         $token = $user->createToken('tokenFamily')->plainTextToken; 
-        $response = [
-            'token' => $token,
-            'user'  => $user
-        ];
-        return response()->json($response,201);
+        $user->token = $token;
+        return response()->json($user,201);
 
     }
     public function login(Request $request){
@@ -53,10 +52,10 @@ class auth extends Controller
             return response()->json(['message'=>'Invalid account'],401);
         }
         $token = $user->createToken('myapptoken')->plainTextToken; 
+        $user->token = $token;
         $response = [
             'message'=>'welcome'.$user->name,
             'user' => $user,
-            'token' => $token
         ];
         return response()->json($response,201);
 

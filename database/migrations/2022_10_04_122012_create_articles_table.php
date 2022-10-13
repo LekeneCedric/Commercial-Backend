@@ -22,12 +22,15 @@ class CreateArticlesTable extends Migration
             $table->integer('prix');
             $table->integer('prix_achat');
             $table->boolean('stockable');
-            $table->integer('stock_securite');
-            $table->integer('stock_restant');
-            $table->integer('stock_realise');
-            $table->foreignId('fournisseur_id')->constrained('fournisseurs')->onDelete('cascade');
-            $table->foreignId('marque_id')->constrained('marques')->onDelete('cascade');
-            $table->foreignId('categorie_id')->constrained('categories')->onDelete('cascade');
+            $table->integer('isnouveau');
+            $table->integer('stock_min');
+            $table->integer('stock_minb');
+            $table->integer('stock_rea');
+            $table->integer('stock_res');
+            $table->foreignId('idfournisseur')->constrained('fournisseurs')->onDelete('cascade');
+            $table->foreignId('idmarque')->constrained('marques')->onDelete('cascade');
+            $table->foreignId('idcategorie')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('idrayon')->constrained('rayons')->onDelete('cascade');
             $table->timestamps();
         });
     }

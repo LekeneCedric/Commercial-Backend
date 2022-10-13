@@ -23,13 +23,17 @@ class ArticleController extends Controller
             'description'=>'required|string',
             'prix'=>'required|int',
             'prix_achat'=>'required|int',
+            'isnouveau'=>'required|int',
             'stockable'=>'required',
-            'stock_securite'=>'required|int',
-            'stock_restant'=>'required|int',
-            'stock_realise'=>'required|int',
-            'fournisseur_id'=>'required|int',
-            'marque_id'=>'required|int',
-            'categorie_id'=>'required|int'
+            'stock_min'=>'required|int',
+            'stock_minb'=>'required|int',
+            'stock_rea'=>'required|int',
+            'stock_res'=>'required|int',
+            'idrayon'=>'required|int',
+            'idmarque'=>'required|int',
+            'idfournisseur'=>'required|int',
+            'idcategorie'=>'required|int',
+
             
         ]);
         if($validators->fails()){

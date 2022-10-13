@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('titre');
-            $table->string('icon');
+            $table->string('menu');
             $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
             $table->timestamps();
         });

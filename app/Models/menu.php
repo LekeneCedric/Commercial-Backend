@@ -10,9 +10,10 @@ class menu extends Model
     use HasFactory;
     
     protected $fillable = [
+        'idparent',
         'titre',
-        'color',
-        'icon'
+        'lien',
+        'ordre'
     ];
 
     protected $dates = ['created_at', 'updated_at'];

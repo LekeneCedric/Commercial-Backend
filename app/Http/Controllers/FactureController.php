@@ -15,11 +15,27 @@ class FactureController extends Controller
     }
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
-            'lieu'=>'required',
-            'delaipayement'=>'required',
-            'commercial_id'=>'required',
-            'client_id'=>'required',
+            'remise'=>'required',
             'etat'=>'required',
+            'montant_totalHT'=>'required',
+            'montant_totalTT'=>'required',
+            'montant_tva'=>'required',
+            'montant_autre'=>'required',
+            'montant_remise'=>'required',
+            'description'=>'required',
+            'dateenvoie'=>'required',
+            'lieu_livraison'=>'required',
+            'delai_paiement'=>'required',
+            'idproformat'=>'required',
+            'id_bon_livraison'=>'required',
+            'id_bon_commande'=>'required',
+            'idclient'=>'required',
+            'id_mode_reglement'=>'required',
+            'id_monnaie'=>'required',
+            'idtva'=>'required',
+            'idcommerciaux'=>'required',
+            'idutilisateur'=>'required',
+            'idagence'=>'required'
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

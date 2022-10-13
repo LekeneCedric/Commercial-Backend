@@ -20,6 +20,8 @@ class CreateUtilisateursTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->string('telephone');
+            $table->foreignId('idrole')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('idagence')->constrained('agences')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -5,40 +5,39 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class client extends Model
+class prospect extends Model
 {
     use HasFactory;
-    protected $fillable = [
+    protected $fillable=[
         'id',
         'type',
-        'code',
+        'nom',
+        'email',
         'password',
+        'telephone',
         'adresse',
-        'ville',
         'siteweb',
+        'etat',
+        'evenement',
         'num_contri',
         'registre',
-        'logo',
-        'mot_cle',
-        'description',
-        'domaine_activite',
-        'nom',
-        'prenom',
-        'telephone',
-        'email',
-        'entreprise',
+        'isclient',
         'idpays',
-        'idcategorie'
+        'idcategorie',
+        'idprospecteur'
     ];
     protected $dates = ['created_at', 'updated_at'];
 
-    public function suggestion(){
-        return $this->hasMany(suggestion::class);
-    }
     public function pays(){
         return $this->belongsTo(pays::class,'idpays');
     }
+
     public function categorie(){
         return $this->belongsTo(categorie::class,'idcategorie');
     }
+
+    public function prospecteur(){
+        return $this->belongsTo(prospecteur::class,'idprospecteur');
+    }
+    
 }

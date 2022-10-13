@@ -15,7 +15,7 @@ class CategorieController extends Controller
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
         'titre'=>'required|string',
-        'icon'=>'required|string',
+        'menu'=>'required|string',
         'menu_id'=>'required|int',
         ]);
         if($validators->fails()){

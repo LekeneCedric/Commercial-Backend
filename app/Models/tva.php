@@ -5,21 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class categorie extends Model
+class tva extends Model
 {
     use HasFactory;
-
-    protected $fillable=[
+    protected $fillable = [
         'id',
-        'titre',
-        'menu',
-        'menu_id'
+        'valeur',
+        'idpays'
     ];
-    
     protected $dates = ['created_at', 'updated_at'];
 
-    
-    public function menu(){
-        return $this->belongsTo(menu::class,'menu_id');
+    public function pays(){
+        return $this->belongsTo(Pays::class,'idpays');
     }
 }
