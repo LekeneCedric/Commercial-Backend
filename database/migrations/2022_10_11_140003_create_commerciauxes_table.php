@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommerciauxsTable extends Migration
+class CreateCommerciauxesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCommerciauxsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commerciauxs', function (Blueprint $table) {
+        Schema::create('commerciauxes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nom');
             $table->string('prenom');

@@ -33,7 +33,7 @@ class CreateFacturesTable extends Migration
             $table->foreignId('id_mode_reglement')->constrained('mode_reglements')->onDelete('cascade');
             $table->foreignId('id_monnaie')->constrained('monnaies')->onDelete('cascade');
             $table->foreignId('idtva')->constrained('tvas')->onDelete('cascade');
-            $table->foreignId('idcommerciaux')->constrained('commerciauxs')->onDelete('cascade');
+            $table->foreignId('idcommerciaux')->constrained('commerciauxes')->onDelete('cascade');
             $table->foreignId('idutilisateur')->constrained('utilisateurs')->onDelete('cascade');
             $table->foreignId('idagence')->constrained('agences')->onDelete('cascade');
             $table->timestamps();
