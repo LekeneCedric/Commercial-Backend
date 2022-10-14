@@ -15,7 +15,11 @@ class CommerciauxController extends Controller
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
             'nom'=>'required|string',
-            'logo'=>'required|string'
+            'prenom'=>'required|string',
+            'email'=>'required|email',
+            'telephone'=>'required|string',
+            'idagence'=>'required|int',
+            'idutilisateur'=>'required|int'
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

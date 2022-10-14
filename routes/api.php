@@ -24,6 +24,7 @@ use App\Http\Controllers\ProspectController;
 use App\Http\Controllers\ProspecteurController;
 use App\Http\Controllers\RayonController;
 use App\Http\Controllers\RetourController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\TvaController;
 use App\Http\Controllers\UtilisateurController;
@@ -50,11 +51,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
 
 });
 // Authentication
-Route::post('/register',[auth::class,'register']);
-Route::post('/login',[auth::class,'login']);
-Route::get('/validate-token', function () {
-    return ['data' => 'Token is valid'];
-})->middleware('auth:sanctum');
+Route::post('/auth/login',[auth::class,'login']);
 
 // PUBLICS
 Route::post('/agences',[AgenceController::class,'store']);
@@ -81,12 +78,18 @@ Route::delete('/bon_livraisons/{id}',[BonLivraisonController::class,'delete']);
 Route::get('/bon_livraisons/{id}',[BonLivraisonController::class,'find']);
 Route::get('/bon_livraisons',[BonLivraisonController::class,'index']);
 
+Route::group(['prefix'=>'categories'],function(){
+    Route::post('/',[CategorieController::class,'store']);
+    Route::put('/{id}',[CategorieController::class,'update']);
+    Route::delete('/{id}',[CategorieController::class,'delete']);
+    Route::get('/{id}',[CategorieController::class,'find']);
+    Route::get('/',[CategorieController::class,'index']);
+    Route::get('/parents/list',[CategorieController::class,'parents_categories']);
+    Route::get('/childs/{idparent}',[CategorieController::class,'child_categories']);
+});
 
-Route::post('/categories',[ClientController::class,'store']);
-Route::put('/categories/{id}',[ClientController::class,'update']);
-Route::delete('/categories/{id}',[ClientController::class,'delete']);
-Route::get('/categories/{id}',[ClientController::class,'find']);
-Route::get('/categories',[ClientController::class,'index']);
+
+
 
 Route::post('/clients',[ClientController::class,'store']);
 Route::put('/clients/{id}',[ClientController::class,'update']);
@@ -195,3 +198,9 @@ Route::put('/utilisateurs/{id}',[UtilisateurController::class,'update']);
 Route::delete('/utilisateurs/{id}',[UtilisateurController::class,'delete']);
 Route::get('/utilisateurs/{id}',[UtilisateurController::class,'find']);
 Route::get('/utilisateurs',[UtilisateurController::class,'index']);
+
+Route::post('/roles',[RoleController::class,'store']);
+Route::put('/roles/{id}',[RoleController::class,'update']);
+Route::delete('/roles/{id}',[RoleController::class,'delete']);
+Route::get('/roles/{id}',[RoleController::class,'find']);
+Route::get('/roles',[RoleController::class,'index']);

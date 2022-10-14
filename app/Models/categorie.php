@@ -13,13 +13,9 @@ class categorie extends Model
         'id',
         'titre',
         'menu',
-        'menu_id'
+        'idparent'
     ];
     
     protected $dates = ['created_at', 'updated_at'];
 
-    
-    public function menu(){
-        return $this->belongsTo(menu::class,'menu_id');
-    }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\commerciaux;
 use App\Models\utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
@@ -40,34 +41,18 @@ class auth extends Controller
         $validator=Validator::make($request->all(),[
             
             'email'=>'required|string|email|max:100',
-            'password'=>'required|string',
+            'telephone'=>'required|string',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
-        $user = utilisateur::where('email',$request->email)->first();
-        if(!$user || !Hash::check($request->password , $user->password))
+        $commercial = commerciaux::where('email',$request->email)->where('telephone',$request->telephone)->first();
+        if(!$commercial)
         {
             return response()->json(['message'=>'Invalid account'],401);
         }
-        $token = $user->createToken('myapptoken')->plainTextToken; 
-        $user->token = $token;
-        $response = [
-            'message'=>'welcome'.$user->name,
-            'user' => $user,
-        ];
-        return response()->json($response,201);
-
+        return response()->json($commercial);
     } 
-
-    public function logout(Request $request){
-        FacadesAuth::user()->tokens->each(function($token){
-            $token->delete();
-            return response()->json([
-                'message'=>"utilisateur deconnecte avec success"
-            ]);
-        });
-    }
 }
 

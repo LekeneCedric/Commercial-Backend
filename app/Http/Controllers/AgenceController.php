@@ -14,8 +14,8 @@ class AgenceController extends Controller
     }
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
-            'nom'=>'required|string',
-            'logo'=>'required|string'
+            'intitule'=>'required|string',
+            'description'=>'required|string'
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

@@ -16,7 +16,7 @@ class CategorieController extends Controller
         $validators = Validator::make($request->all(),[
         'titre'=>'required|string',
         'menu'=>'required|string',
-        'menu_id'=>'required|int',
+        'idparent'=>'required|int'
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);
@@ -48,5 +48,29 @@ class CategorieController extends Controller
           }
           $categorie = $categorie->delete();
           return response()->json($categorie);
+    }
+    //Recursive function to get all subcategories
+    public function getChildCat($cat){
+        $categories = categorie::where('idparent',$cat->id)->get();
+        if (count($categories)<1){
+            return 0;
+        }
+        else{
+            $cat->child = $categories;
+            foreach($categories as $categorie){
+                $this->getChildCat($categorie);
+            }
+        }
+    } 
+    public function parents_categories(){
+        $categories = categorie::where('idparent',0)->get();
+        foreach($categories as $categorie){
+            $this->getChildCat($categorie);
+        }
+        return response()->json($categories,200);
+    }
+    public function child_categories($id){
+        $categories = categorie::where('idparent',$id)->get();
+        return response()->json($categories,200);
     }
 }

@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('titre');
             $table->string('menu');
-            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
+            $table->integer('idparent');
             $table->timestamps();
         });
     }

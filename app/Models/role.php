@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class role extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'intitule',
+        'max_produit'
+    ];
+    protected $dates = ['created_at', 'updated_at'];
 }
