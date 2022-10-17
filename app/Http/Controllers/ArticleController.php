@@ -11,7 +11,7 @@ class ArticleController extends Controller
 {
     
     public function index(){
-        $articles = article::paginate(15);
+        $articles = article::all();
         return response()->json($articles,200);
     }
 
@@ -33,8 +33,7 @@ class ArticleController extends Controller
             'idmarque'=>'required|int',
             'idfournisseur'=>'required|int',
             'idcategorie'=>'required|int',
-
-            
+            'dateajout'=>'required'            
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);
@@ -44,6 +43,9 @@ class ArticleController extends Controller
     }
     public function find($id){
         $article = article::find($id);
+        $article->marque;
+        $article->fournisseur;
+        $article->rayon;
         if(is_null($article)){
             return response()->json([
                 'message'=>'aucun article correspondante!'
@@ -68,15 +70,12 @@ class ArticleController extends Controller
           $article = $article->delete();
           return response()->json($article);
     }
-    public function articlesCategories($id){
+    public function articlesForCategorie($id){
         $categorie = categorie::find($id);
         if(is_null($categorie)){
             return response()->json(['message'=>'aucune categorie correspondante']);
         }
         $articles = $categorie->article;
-        foreach($articles as $article){
-            $article->categorie;
-        }
         return response()->json($articles,200);
     }
 }

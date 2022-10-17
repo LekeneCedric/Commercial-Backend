@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class PaysController extends Controller
 {
     public function index(){
-        $payss = pays::paginate(15);
+        $payss = pays::all();
         return response()->json($payss,200);
     }
     public function store(Request $request){

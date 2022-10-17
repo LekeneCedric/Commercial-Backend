@@ -18,4 +18,8 @@ class categorie extends Model
     
     protected $dates = ['created_at', 'updated_at'];
 
+    public function article(){
+        return $this->hasMany(article::class,'idcategorie');
+    }
+
 }

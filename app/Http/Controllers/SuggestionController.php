@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 class SuggestionController extends Controller
 {
     public function index(){
-        $suggestions = suggestion::paginate(15);
+        $suggestions = suggestion::all();
         return response()->json($suggestions,200);
     }
     public function store(Request $request){

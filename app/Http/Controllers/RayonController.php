@@ -16,12 +16,6 @@ class RayonController extends Controller
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
         'intitule'=>'required|string',
-        'description'=>'required|string',
-        'ancien_prix'=>'required|int',
-        'prix_suggere'=>'required|int',
-        'article_id'=>'required|int',
-        'client_id'=>'required|int',
-        'commercial_id'=>'required|int'
             
         ]);
         if($validators->fails()){

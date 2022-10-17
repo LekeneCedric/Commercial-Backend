@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class UtilisateurController extends Controller
 {
     public function index(){
-        $utilisateurs =  utilisateur::paginate(15);
+        $utilisateurs =  utilisateur::all();
         return response()->json($utilisateurs,200);
     }
     public function store(Request $request){

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgenceController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\auth;
+use App\Http\Controllers\BonProduitController;
 use App\Http\Controllers\BonCommandeController;
 use App\Http\Controllers\BonLivraisonController;
 use App\Http\Controllers\CategorieController;
@@ -60,11 +61,15 @@ Route::delete('/agences/{id}',[AgenceController::class,'delete']);
 Route::get('/agences/{id}',[AgenceController::class,'find']);
 Route::get('/agences',[AgenceController::class,'index']);
 
-Route::post('/articles',[ArticleController::class,'store']);
-Route::put('/articles/{id}',[ArticleController::class,'update']);
-Route::delete('/articles/{id}',[ArticleController::class,'delete']);
-Route::get('/articles/{id}',[ArticleController::class,'find']);
-Route::get('/articles',[ArticleController::class,'index']);
+Route::group(['prefix'=>'articles'],function(){
+
+    Route::post('/',[ArticleController::class,'store']);
+    Route::put('/{id}',[ArticleController::class,'update']);
+    Route::delete('/{id}',[ArticleController::class,'delete']);
+    Route::get('/{id}',[ArticleController::class,'find']);
+    Route::get('/',[ArticleController::class,'index']);
+    Route::get('/forCategorie/{idcategorie}',[ArticleController::class,'articlesForCategorie']);
+});
 
 Route::post('/bon_commandes',[BonCommandeController::class,'store']);
 Route::put('/bon_commandes/{id}',[BonCommandeController::class,'update']);
@@ -78,30 +83,45 @@ Route::delete('/bon_livraisons/{id}',[BonLivraisonController::class,'delete']);
 Route::get('/bon_livraisons/{id}',[BonLivraisonController::class,'find']);
 Route::get('/bon_livraisons',[BonLivraisonController::class,'index']);
 
+
 Route::group(['prefix'=>'categories'],function(){
     Route::post('/',[CategorieController::class,'store']);
     Route::put('/{id}',[CategorieController::class,'update']);
     Route::delete('/{id}',[CategorieController::class,'delete']);
     Route::get('/{id}',[CategorieController::class,'find']);
     Route::get('/',[CategorieController::class,'index']);
-    Route::get('/parents/list',[CategorieController::class,'parents_categories']);
+    Route::get('/produits/parents/list',[CategorieController::class,'parents_produits_categories']);
+    Route::get('/clients/list',[CategorieController::class,'clients_categories']);
     Route::get('/childs/{idparent}',[CategorieController::class,'child_categories']);
+    Route::get('/article/{id}',[CategorieController::class,'articleWithCategorie']);
 });
 
+Route::group(['prefix'=>'clients'],function(){
+    Route::post('/',[ClientController::class,'store']);
+    Route::put('/{id}',[ClientController::class,'update']);
+    Route::delete('/{id}',[ClientController::class,'delete']);
+    Route::get('/{id}',[ClientController::class,'find']);
+    Route::get('/',[ClientController::class,'index']);
+});
 
+Route::group(['prefix'=>'bon_produits'],function(){
+    Route::post('/',[BonProduitController::class,'store']);
+    Route::put('/{id}',[BonProduitController::class,'update']);
+    Route::delete('/{id}',[BonProduitController::class,'delete']);
+    Route::get('/{id}',[BonProduitController::class,'find']);
+    Route::get('/',[BonProduitController::class,'index']);
+});
 
+Route::group(['prefix'=>'commerciaux'],function(){
+    Route::post('/',[CommerciauxController::class,'store']);
+    Route::put('/{id}',[CommerciauxController::class,'update']);
+    Route::delete('/{id}',[CommerciauxController::class,'delete']);
+    Route::get('/{id}',[CommerciauxController::class,'find']);
+    Route::get('/',[CommerciauxController::class,'index']);
+    Route::get('/factures/{id}',[CommerciauxController::class,'facturesCommercial']);
+    Route::get('/statistics/{id}',[CommerciauxController::class,'statistics']);
+});
 
-Route::post('/clients',[ClientController::class,'store']);
-Route::put('/clients/{id}',[ClientController::class,'update']);
-Route::delete('/clients/{id}',[ClientController::class,'delete']);
-Route::get('/clients/{id}',[ClientController::class,'find']);
-Route::get('/clients',[ClientController::class,'index']);
-
-Route::post('/commerciaux',[CommerciauxController::class,'store']);
-Route::put('/commerciaux/{id}',[CommerciauxController::class,'update']);
-Route::delete('/commerciaux/{id}',[CommerciauxController::class,'delete']);
-Route::get('/commerciaux/{id}',[CommerciauxController::class,'find']);
-Route::get('/commerciaux',[CommerciauxController::class,'index']);
 
 Route::post('/condition_reglements',[ConditionReglementController::class,'store']);
 Route::put('/condition_reglements/{id}',[ConditionReglementController::class,'update']);

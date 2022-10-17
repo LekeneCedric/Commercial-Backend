@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\article;
 use App\Models\categorie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +13,7 @@ class CategorieController extends Controller
         $categories = categorie::all();
         return response()->json($categories,200);
     }
+
     public function store(Request $request){
         $validators = Validator::make($request->all(),[
         'titre'=>'required|string',
@@ -24,6 +26,7 @@ class CategorieController extends Controller
         $categorie = categorie::create($validators->validated());
         return response()->json($categorie,200);
     }
+    
     public function find($id){
         $categorie = categorie::find($id);
         if(is_null($categorie)){
@@ -33,6 +36,7 @@ class CategorieController extends Controller
         }
         return response()->json($categorie,200);
     }
+
     public function update(Request $request, $id){
         $categorie = categorie::find($id);
         if(is_null($categorie)){
@@ -41,6 +45,7 @@ class CategorieController extends Controller
         $categorie_update = $categorie->update($request->all());
         return response()->json($categorie_update,200);
     }
+
     public function delete($id){
           $categorie = categorie::find($id);
           if(is_null($categorie)){
@@ -49,10 +54,12 @@ class CategorieController extends Controller
           $categorie = $categorie->delete();
           return response()->json($categorie);
     }
+
     //Recursive function to get all subcategories
     public function getChildCat($cat){
         $categories = categorie::where('idparent',$cat->id)->get();
         if (count($categories)<1){
+            $cat->child=[];
             return 0;
         }
         else{
@@ -62,15 +69,27 @@ class CategorieController extends Controller
             }
         }
     } 
-    public function parents_categories(){
-        $categories = categorie::where('idparent',0)->get();
+
+    public function parents_produits_categories(){
+        $categories = categorie::where('idparent',0)->where('menu','!=','client')->get();
         foreach($categories as $categorie){
             $this->getChildCat($categorie);
         }
         return response()->json($categories,200);
     }
+
     public function child_categories($id){
         $categories = categorie::where('idparent',$id)->get();
+        return response()->json($categories,200);
+    }
+
+    public function articleWithCategorie($id){
+        $articles = article::where('idcategorie',$id)->first();
+        return response()->json($articles,200);
+    }
+
+    public function clients_categories(){
+        $categories = categorie::where('menu','client')->get();
         return response()->json($categories,200);
     }
 }

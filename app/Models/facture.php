@@ -26,7 +26,7 @@ class facture extends Model
         'id_bon_commande',
         'idclient',
         'id_mode_reglement',
-        'id_monnaie',
+        'idmonnaie',
         'idtva',
         'idcommerciaux',
         'idutilisateur',
@@ -65,4 +65,5 @@ class facture extends Model
     public function agence(){
         return $this->belongsTo(agence::class,'idagence');
     }
+    
 }

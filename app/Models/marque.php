@@ -17,6 +17,6 @@ class marque extends Model
     protected $dates = ['created_at', 'updated_at'];
 
     public function article(){
-        return $this->hasMany(article::class);
+        return $this->hasMany(article::class,'idmarque');
     }
 }

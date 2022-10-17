@@ -20,18 +20,19 @@ class CreateArticlesTable extends Migration
             $table->integer('quantite');
             $table->string('description');
             $table->integer('prix');
+            $table->string('image')->default("");
             $table->integer('prix_achat');
             $table->boolean('stockable');
             $table->integer('isnouveau');
-            $table->integer('stock_min');
-            $table->integer('stock_minb');
-            $table->integer('stock_rea');
-            $table->integer('stock_res');
-            $table->foreignId('idfournisseur')->constrained('fournisseurs')->onDelete('cascade');
-            $table->foreignId('idmarque')->constrained('marques')->onDelete('cascade');
-            $table->foreignId('idcategorie')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('idrayon')->constrained('rayons')->onDelete('cascade');
-            $table->timestamps();
+            $table->integer('stock_min')->default(0);
+            $table->integer('stock_minb')->default(0);
+            $table->integer('stock_rea')->default(0);
+            $table->integer('stock_res')->default(0);
+            $table->timestamp('dateajout')->nullable();
+            $table->foreignId('idfournisseur')->nullable()->default(null)->constrained('fournisseurs')->onDelete('cascade');
+            $table->foreignId('idmarque')->nullable()->default(null)->constrained('marques')->onDelete('cascade');
+            $table->foreignId('idcategorie')->nullable()->default(null)->constrained('categories')->onDelete('cascade');
+            $table->foreignId('idrayon')->nullable()->default(null)->constrained('rayons')->onDelete('cascade');
         });
     }
 

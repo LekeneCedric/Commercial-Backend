@@ -15,10 +15,10 @@ class fournisseur extends Model
         'telephone',
         'adresse',
         'domaine_activite',
+        'dateajout'
     ];
-    protected $dates = ['created_at', 'updated_at'];
     
     public function article(){
-        return $this->hasMany(article::class);
+        return $this->hasMany(article::class,'idfournisseur');
     }
 }

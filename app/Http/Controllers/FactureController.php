@@ -25,17 +25,10 @@ class FactureController extends Controller
             'description'=>'required',
             'dateenvoie'=>'required',
             'lieu_livraison'=>'required',
-            'delai_paiement'=>'required',
-            'idproformat'=>'required',
-            'id_bon_livraison'=>'required',
-            'id_bon_commande'=>'required',
             'idclient'=>'required',
-            'id_mode_reglement'=>'required',
-            'id_monnaie'=>'required',
-            'idtva'=>'required',
+            'idmonnaie'=>'required',
             'idcommerciaux'=>'required',
-            'idutilisateur'=>'required',
-            'idagence'=>'required'
+            'idagence'=>'required',
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

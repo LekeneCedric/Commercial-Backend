@@ -20,8 +20,8 @@ class CreateFournisseursTable extends Migration
             $table->string('telephone');
             $table->string('adresse');
             $table->string('photo')->nullable();
-            $table->string('domaine_activite');
-            $table->timestamps();
+            $table->string('domaine_activite')->nullable()->default("");
+            $table->timestamp('dateajout');
         });
     }
 

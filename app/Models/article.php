@@ -26,8 +26,8 @@ class article extends Model
         'idmarque',
         'idfournisseur',
         'idcategorie',
+        'dateajout'
     ];
-    protected $dates = ['created_at', 'updated_at'];
     
     public function fournisseur(){
         return $this->belongsTo(fournisseur::class,'idfournisseur');

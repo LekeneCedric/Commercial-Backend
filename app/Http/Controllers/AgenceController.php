@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class AgenceController extends Controller
 {
     public function index(){
-        $agences =  agence::paginate(15);
+        $agences =  agence::all();
         return response()->json($agences,200);
     }
     public function store(Request $request){

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\bon_produit;
 use App\Models\commerciaux;
+use App\Models\facture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,5 +53,17 @@ class CommerciauxController extends Controller
           }
           $commerciaux = $commerciaux->delete();
           return response()->json($commerciaux);
+    }
+
+    public function facturesCommercial($id){
+        $factures = facture::where('idcommerciaux',$id)->get();
+        foreach ($factures as $facture){
+            $bon_produit = bon_produit::where('idfacture',$facture->id)->get();
+            foreach($bon_produit as $bon_prod){
+                $bon_prod->article;
+            }
+           $facture->produits = $bon_produit;
+        }
+        return response()->json($factures,200);
     }
 }
