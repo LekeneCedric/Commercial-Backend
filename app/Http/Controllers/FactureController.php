@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\bon_produit;
 use App\Models\commercial;
 use App\Models\facture;
 use Illuminate\Http\Request;
@@ -43,12 +44,15 @@ class FactureController extends Controller
                 'message'=>'aucune facture correspondante!'
             ]);
         }
-        $facture->facturedetail;
-        $facture->client;
-        foreach($facture->facturedetail as $factured){
-            $factured->article->categorie;
-            
-        }
+            $bon_produit = bon_produit::where('idfacture',$facture->id)->get();
+            $qtetotal=0;
+            foreach($bon_produit as $bon_prod){
+                $bon_prod->article;
+                $qtetotal+=$bon_prod->quantite;
+            }
+            $facture->quantite_total = $qtetotal;
+           $facture->produits = $bon_produit;
+           $facture->client;
         return response()->json($facture,200);
     }
     public function update(Request $request, $id){
@@ -66,6 +70,14 @@ class FactureController extends Controller
           }
           $facture = $facture->delete();
           return response()->json($facture);
+    }
+
+    public function facturesClient($idclient){
+        $factures = facture::where('idclient',$idclient)->orderBy('created_at','DESC')->get();
+        if(count($factures)>0){
+            $factures[0]->client;
+        }
+        return response()->json($factures,200);
     }
     
 }

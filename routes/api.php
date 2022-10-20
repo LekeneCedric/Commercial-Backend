@@ -13,6 +13,7 @@ use App\Http\Controllers\CommerciauxController;
 use App\Http\Controllers\ConditionReglementController;
 use App\Http\Controllers\FactureController;
 use App\Http\Controllers\FacturedetailController;
+use App\Http\Controllers\FicheSortieController;
 use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\MarqueController;
 use App\Http\Controllers\MediaController;
@@ -29,6 +30,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\TvaController;
 use App\Http\Controllers\UtilisateurController;
+use App\Models\ficheSortie;
 use App\Models\utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -71,17 +73,6 @@ Route::group(['prefix'=>'articles'],function(){
     Route::get('/forCategorie/{idcategorie}',[ArticleController::class,'articlesForCategorie']);
 });
 
-Route::post('/bon_commandes',[BonCommandeController::class,'store']);
-Route::put('/bon_commandes/{id}',[BonCommandeController::class,'update']);
-Route::delete('/bon_commandes/{id}',[BonCommandeController::class,'delete']);
-Route::get('/bon_commandes/{id}',[BonCommandeController::class,'find']);
-Route::get('/bon_commandes',[BonCommandeController::class,'index']);
-
-Route::post('/bon_livraisons',[BonLivraisonController::class,'store']);
-Route::put('/bon_livraisons/{id}',[BonLivraisonController::class,'update']);
-Route::delete('/bon_livraisons/{id}',[BonLivraisonController::class,'delete']);
-Route::get('/bon_livraisons/{id}',[BonLivraisonController::class,'find']);
-Route::get('/bon_livraisons',[BonLivraisonController::class,'index']);
 
 
 Route::group(['prefix'=>'categories'],function(){
@@ -120,20 +111,42 @@ Route::group(['prefix'=>'commerciaux'],function(){
     Route::get('/',[CommerciauxController::class,'index']);
     Route::get('/factures/{id}',[CommerciauxController::class,'facturesCommercial']);
     Route::get('/statistics/{id}',[CommerciauxController::class,'statistics']);
+    Route::get('/ficheSortie/{id}',[CommerciauxController::class,'mesArticles']);
+});
+Route::group(['prefix'=>'ficheSorties'],function(){
+    Route::post('/',[FicheSortieController::class,'store']);
+    Route::put('/{id}',[ficheSortieController::class,'update']);
+    Route::delete('/{id}',[ficheSortieController::class,'delete']);
+    Route::get('/{id}',[ficheSortieController::class,'find']);
+    Route::get('/',[ficheSortieController::class,'index']);
 });
 
+Route::group(['prefix'=>'factures'],function(){
+    Route::post('/',[FactureController::class,'store']);
+    Route::put('/{id}',[FactureController::class,'update']);
+    Route::delete('/{id}',[FactureController::class,'delete']);
+    Route::get('/{id}',[FactureController::class,'find']);
+    Route::get('/',[FactureController::class,'index']);
+    Route::get('/client/{id}',[FactureController::class,'facturesClient']);
+});
+
+Route::post('/bon_commandes',[BonCommandeController::class,'store']);
+Route::put('/bon_commandes/{id}',[BonCommandeController::class,'update']);
+Route::delete('/bon_commandes/{id}',[BonCommandeController::class,'delete']);
+Route::get('/bon_commandes/{id}',[BonCommandeController::class,'find']);
+Route::get('/bon_commandes',[BonCommandeController::class,'index']);
+
+Route::post('/bon_livraisons',[BonLivraisonController::class,'store']);
+Route::put('/bon_livraisons/{id}',[BonLivraisonController::class,'update']);
+Route::delete('/bon_livraisons/{id}',[BonLivraisonController::class,'delete']);
+Route::get('/bon_livraisons/{id}',[BonLivraisonController::class,'find']);
+Route::get('/bon_livraisons',[BonLivraisonController::class,'index']);
 
 Route::post('/condition_reglements',[ConditionReglementController::class,'store']);
 Route::put('/condition_reglements/{id}',[ConditionReglementController::class,'update']);
 Route::delete('/condition_reglements/{id}',[ConditionReglementController::class,'delete']);
 Route::get('/condition_reglements/{id}',[ConditionReglementController::class,'find']);
 Route::get('/condition_reglements',[ConditionReglementController::class,'index']);
-
-Route::post('/factures',[FactureController::class,'store']);
-Route::put('/factures/{id}',[FactureController::class,'update']);
-Route::delete('/factures/{id}',[FactureController::class,'delete']);
-Route::get('/factures/{id}',[FactureController::class,'find']);
-Route::get('/factures',[FactureController::class,'index']);
 
 Route::post('/fournisseurs',[FournisseurController::class,'store']);
 Route::put('/fournisseurs/{id}',[FournisseurController::class,'update']);

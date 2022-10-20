@@ -41,4 +41,7 @@ class article extends Model
     public function rayon(){
         return $this->belongsTo(rayon::class,'idrayon');
     }
+    public function ficheSortie(){
+        return $this->hasMany(ficheSortie::class,'idarticle');
+    }
 }

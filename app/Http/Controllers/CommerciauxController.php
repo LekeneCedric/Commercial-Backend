@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\bon_produit;
 use App\Models\commerciaux;
 use App\Models\facture;
+use App\Models\ficheSortie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -19,6 +20,7 @@ class CommerciauxController extends Controller
             'nom'=>'required|string',
             'prenom'=>'required|string',
             'email'=>'required|email',
+            'commission'=>'required|int',
             'telephone'=>'required|string',
             'idagence'=>'required|int',
             'idutilisateur'=>'required|int'
@@ -56,14 +58,49 @@ class CommerciauxController extends Controller
     }
 
     public function facturesCommercial($id){
-        $factures = facture::where('idcommerciaux',$id)->get();
-        foreach ($factures as $facture){
-            $bon_produit = bon_produit::where('idfacture',$facture->id)->get();
-            foreach($bon_produit as $bon_prod){
-                $bon_prod->article;
-            }
-           $facture->produits = $bon_produit;
-        }
+        $factures = facture::where('idcommerciaux',$id)->orderBy('created_at','DESC')->get();
         return response()->json($factures,200);
     }
+
+    public function statistics($idcom){
+        $commercial = commerciaux::find($idcom);
+        if(is_null($commercial)){
+            return response()->json(['message'=>'aucun commercial correspondant a ce ID'],404);
+        }
+         # get benefices : 
+         # first time we will get all invoice of commercial and get correspond bon_produit
+         # then we will go thought every bon_produit and increment to the final variable that contains total amount
+         $produitsVendus = 0 ; 
+         $revenusTotal = 0 ;
+         $factures = facture::where('idcommerciaux',$idcom)->get();
+         if(count($factures)<1){
+            return response()->json(['message'=>'aucune facture']);
+         }
+         foreach($factures as $facture){
+            $bons = bon_produit::where('idfacture',$facture->id)->get();;
+            foreach($bons as $bon){
+                $produitsVendus += $bon->quantite;
+            }
+            $revenusTotal += $facture->montant_totalHT;
+         }
+         $revenus = $produitsVendus*500;
+         $ventesTotal = count(facture::where('idcommerciaux',$idcom)->get());
+         return response()->json([
+            'benefice'=>$revenus,
+            'nbprodVendus'=>$produitsVendus,
+            'revenueTotal'=>$revenusTotal,
+            'nbVentes'=>$ventesTotal,
+         ],200);
+    }
+    public function getArticles($idcommercial){
+     $fiches = ficheSortie::where('idcommercial',$idcommercial);
+     if (count($fiches)<1){
+        return response()->json(['message'=>'aucune fiche actuelle'],404);
+     }
+     $produits = [];
+     foreach($fiches as $fiche){
+        array_merge($produits,$fiche->article);   
+     }
+     return response()->json($produits,200);
+    }  
 }

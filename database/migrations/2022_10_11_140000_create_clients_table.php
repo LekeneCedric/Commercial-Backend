@@ -16,7 +16,8 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('idpays')->constrained('pays')->onDelete('cascade');
-            $table->foreignId('idcategorie')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('idcategorie')->constrained('categories');
+            $table->foreignId('idcommercial')->constrained('commerciauxes');
             $table->integer('type');
             $table->string('code')->nullable()->default("");
             $table->string('nom');

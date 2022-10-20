@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\client;
+use App\Models\commerciaux;
 use App\Models\suggestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,7 +11,13 @@ use Illuminate\Support\Facades\Validator;
 class SuggestionController extends Controller
 {
     public function index(){
-        $suggestions = suggestion::all();
+        $suggestions = suggestion::orderBy('created_at','DESC')->get();
+        foreach($suggestions as $suggestion){
+            $suggestion->client;
+            $suggestion->article;
+            $commercial = commerciaux::find($suggestion->commercial_id);
+            $suggestion->commerciaux = $commercial;
+        }
         return response()->json($suggestions,200);
     }
     public function store(Request $request){

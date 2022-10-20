@@ -13,6 +13,7 @@ class commerciaux extends Model
         'nom',
         'prenom',
         'email',
+        'commission',
         'telephone',
         'idagence',
         'idutilisateur'
@@ -24,5 +25,11 @@ class commerciaux extends Model
     }
     public function utilisateur(){
         return $this->belongsTo(utilisateur::class,'idutilisateur');
+    }
+    public function client(){
+        return $this->hasMany(client::class,'idcommercial');
+    }
+    public function suggestion(){
+        return $this->hasMany(suggestion::class);
     }
 }

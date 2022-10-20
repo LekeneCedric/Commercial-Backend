@@ -28,7 +28,8 @@ class client extends Model
         'email',
         'entreprise',
         'idpays',
-        'idcategorie'
+        'idcategorie',
+        'idcommercial'
     ];
     protected $dates = ['created_at', 'updated_at'];
 
@@ -40,5 +41,8 @@ class client extends Model
     }
     public function categorie(){
         return $this->belongsTo(categorie::class,'idcategorie');
+    }
+    public function commercial(){
+        return $this->belongsTo(commerciaux::class,'idcommercial');
     }
 }

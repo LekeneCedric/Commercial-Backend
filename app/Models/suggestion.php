@@ -30,4 +30,5 @@ class suggestion extends Model
     public function article(){
         return $this->belongsTo(article::class, 'article_id');
     }
+    
 }
