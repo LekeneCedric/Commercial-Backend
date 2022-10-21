@@ -22,10 +22,8 @@ class ProspectionController extends Controller
             'telephone'=>'required|string',
             'categorie'=>'required|string',
             'quartier'=>'required|string',
-            'zone'=>'required|string',
-            'zone'=>'required|string',
             'observations'=>'required|string',
-            'idcommerciaux'=>'required|number',
+            'idcommerciaux'=>'required|int',
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);

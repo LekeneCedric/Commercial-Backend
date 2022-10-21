@@ -15,8 +15,6 @@ class prospection extends Model
         'telephone',
         'categorie',
         'quartier',
-        'zone',
-        'zone',
         'observations',
         'idcommerciaux',
     ];

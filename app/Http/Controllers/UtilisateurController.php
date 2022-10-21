@@ -16,9 +16,9 @@ class UtilisateurController extends Controller
         $validators = Validator::make($request->all(),[
             'nom'=>'required|string',
             'prenom'=>'required|string',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:utilisateurs',
             'password'=>'required|string',
-            'telephone'=>'required|string',
+            'telephone'=>'required|string|unique:utilisateurs',
             'idrole'=>'required|int',   
             'idagence'=>'required|int'
         ]);

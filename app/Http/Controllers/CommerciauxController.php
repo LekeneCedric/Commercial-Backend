@@ -19,9 +19,9 @@ class CommerciauxController extends Controller
         $validators = Validator::make($request->all(),[
             'nom'=>'required|string',
             'prenom'=>'required|string',
-            'email'=>'required|email',
+            'email'=>'required|email|unique:commerciauxes',
             'commission'=>'required|int',
-            'telephone'=>'required|string',
+            'telephone'=>'required|string|unique:commerciauxes',
             'idagence'=>'required|int',
             'idutilisateur'=>'required|int'
         ]);
@@ -54,7 +54,7 @@ class CommerciauxController extends Controller
             return response()->json(['message'=>'aucune commerciaux correspondante']);
           }
           $commerciaux = $commerciaux->delete();
-          return response()->json($commerciaux);
+          return response()->json(['message'=>'commercial supprime avec success']);
     }
 
     public function facturesCommercial($id){
@@ -73,9 +73,7 @@ class CommerciauxController extends Controller
          $produitsVendus = 0 ; 
          $revenusTotal = 0 ;
          $factures = facture::where('idcommerciaux',$idcom)->get();
-         if(count($factures)<1){
-            return response()->json(['message'=>'aucune facture']);
-         }
+         
          foreach($factures as $facture){
             $bons = bon_produit::where('idfacture',$facture->id)->get();;
             foreach($bons as $bon){
@@ -85,22 +83,21 @@ class CommerciauxController extends Controller
          }
          $revenus = $produitsVendus*500;
          $ventesTotal = count(facture::where('idcommerciaux',$idcom)->get());
+         $nbclients = count($commercial->client);
          return response()->json([
             'benefice'=>$revenus,
             'nbprodVendus'=>$produitsVendus,
             'revenueTotal'=>$revenusTotal,
             'nbVentes'=>$ventesTotal,
+            'nbclients'=>$nbclients
          ],200);
     }
-    public function getArticles($idcommercial){
-     $fiches = ficheSortie::where('idcommercial',$idcommercial);
-     if (count($fiches)<1){
-        return response()->json(['message'=>'aucune fiche actuelle'],404);
-     }
+    public function mesArticles($idcom){
+     $fiches = ficheSortie::where('idcommercial',$idcom)->get();
      $produits = [];
      foreach($fiches as $fiche){
-        array_merge($produits,$fiche->article);   
+        array_push($produits,$fiche->article);   
      }
-     return response()->json($produits,200);
+     return response()->json($fiches,200);
     }  
 }

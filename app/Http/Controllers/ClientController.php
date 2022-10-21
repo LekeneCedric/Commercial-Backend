@@ -32,7 +32,8 @@ class ClientController extends Controller
         'email'=>'required|email',
         'boite_postal',
         'idpays'=>'required',
-        'idcategorie'=>'required'
+        'idcategorie'=>'required',
+        'idcommercial'=>'required'
        ]);
        if($validator->fails()){
         return response()->json($validator->errors(),400);

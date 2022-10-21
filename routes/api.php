@@ -24,6 +24,7 @@ use App\Http\Controllers\PaysController;
 use App\Http\Controllers\ProformatController;
 use App\Http\Controllers\ProspectController;
 use App\Http\Controllers\ProspecteurController;
+use App\Http\Controllers\ProspectionController;
 use App\Http\Controllers\RayonController;
 use App\Http\Controllers\RetourController;
 use App\Http\Controllers\RoleController;
@@ -85,6 +86,15 @@ Route::group(['prefix'=>'categories'],function(){
     Route::get('/clients/list',[CategorieController::class,'clients_categories']);
     Route::get('/childs/{idparent}',[CategorieController::class,'child_categories']);
     Route::get('/article/{id}',[CategorieController::class,'articleWithCategorie']);
+});
+
+
+Route::group(['prefix'=>'prospections'],function(){
+    Route::post('/',[ProspectionController::class,'store']);
+    Route::put('/{id}',[ProspectionController::class,'update']);
+    Route::delete('/{id}',[ProspectionController::class,'delete']);
+    Route::get('/{id}',[ProspectionController::class,'find']);
+    Route::get('/',[ProspectionController::class,'index']);
 });
 
 Route::group(['prefix'=>'clients'],function(){

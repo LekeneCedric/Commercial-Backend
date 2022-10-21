@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class FicheSortieController extends Controller
 {
     public function index(){
-        $ficheSorties = ficheSortie::paginate(15);
+        $ficheSorties = ficheSortie::all();
         return response()->json($ficheSorties,200);
     }
     public function store(Request $request){
