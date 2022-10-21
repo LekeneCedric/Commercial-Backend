@@ -29,7 +29,6 @@ class FactureController extends Controller
             'idclient'=>'required',
             'idmonnaie'=>'required',
             'idcommerciaux'=>'required',
-            'idagence'=>'required',
         ]);
         if($validators->fails()){
             return response()->json($validators->errors(),400);
