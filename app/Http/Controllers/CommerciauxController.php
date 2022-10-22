@@ -96,8 +96,22 @@ class CommerciauxController extends Controller
      $fiches = ficheSortie::where('idcommercial',$idcom)->get();
      $produits = [];
      foreach($fiches as $fiche){
-        array_push($produits,$fiche->article);   
+        $quantite = $fiche->quantite;
+            array_push($produits,$fiche->article); 
      }
      return response()->json($fiches,200);
     }  
+    public function reduceMyArticleQuantity($idcom,$idarticle,$quantite){
+        $fiches = ficheSortie::where('idcommercial',$idcom)->get();
+        foreach($fiches as $fiche){
+            if ($fiche->idarticle == $idarticle){
+                $fi = ficheSortie::find($fiche->id);
+                $fi->update(['quantite'=>($fi->quantite) - $quantite ]);
+                return response()->json(['message'=>'modification avec success'],200);
+            }
+        }
+        return response()->json([
+            'msg'=>'Aucune fiche correspondante'
+        ]);
+    }
 }

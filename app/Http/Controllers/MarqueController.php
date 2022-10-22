@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class MarqueController extends Controller
 {
     public function index(){
-        $marques = marque::paginate(15);
+        $marques = marque::all();
         return response()->json($marques,200);
     }
     public function store(Request $request){

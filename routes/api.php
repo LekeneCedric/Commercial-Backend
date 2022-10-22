@@ -82,6 +82,7 @@ Route::group(['prefix'=>'categories'],function(){
     Route::delete('/{id}',[CategorieController::class,'delete']);
     Route::get('/{id}',[CategorieController::class,'find']);
     Route::get('/',[CategorieController::class,'index']);
+    Route::get('/getbyMenu/{id}',[CategorieController::class,'getCategoryByMenu']);
     Route::get('/produits/parents/list',[CategorieController::class,'parents_produits_categories']);
     Route::get('/clients/list',[CategorieController::class,'clients_categories']);
     Route::get('/childs/{idparent}',[CategorieController::class,'child_categories']);
@@ -122,6 +123,7 @@ Route::group(['prefix'=>'commerciaux'],function(){
     Route::get('/factures/{id}',[CommerciauxController::class,'facturesCommercial']);
     Route::get('/statistics/{id}',[CommerciauxController::class,'statistics']);
     Route::get('/ficheSortie/{id}',[CommerciauxController::class,'mesArticles']);
+    Route::post('/reduceCommercialProd/{idcom},{idarticle},{quantite}',[CommerciauxController::class,'reduceMyArticleQuantity']);
 });
 Route::group(['prefix'=>'ficheSorties'],function(){
     Route::post('/',[FicheSortieController::class,'store']);

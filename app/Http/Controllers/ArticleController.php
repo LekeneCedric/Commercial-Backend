@@ -59,8 +59,8 @@ class ArticleController extends Controller
         if(is_null($article)){
             return response()->json(['message'=>'aucun article']);
         }
-        $article_update = $article->update($request->all());
-        return response()->json($article_update,200);
+        $article->update($request->all());
+        return response()->json($article,200);
     }
     public function delete($id){
           $article = article::find($id);
